@@ -1,0 +1,55 @@
+[
+  {
+    "id": "two-sum",
+    "title": "Two Sum",
+    "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
+    "difficulty": "Easy",
+    "category": "Array",
+    "keywords": ["array", "hash", "map"],
+    "examples": [
+      {
+        "input": "nums = [2,7,11,15], target = 9",
+        "output": "[0,1]"
+      },
+      {
+        "input": "nums = [3,2,4], target = 6",
+        "output": "[1,2]"
+      }
+    ],
+    "starterCode": "function twoSum(nums, target) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "reverse-string",
+    "title": "Reverse String",
+    "description": "Write a function that reverses a string. The input string is given as an array of characters s.",
+    "difficulty": "Easy",
+    "category": "String",
+    "keywords": ["string", "reverse"],
+    "examples": [
+      {
+        "input": "s = ['h','e','l','l','o']",
+        "output": "['o','l','l','e','h']"
+      }
+    ],
+    "starterCode": "function reverseString(s) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "palindrome-number",
+    "title": "Palindrome Number", 
+    "description": "Given an integer x, return true if x is palindrome integer.",
+    "difficulty": "Easy",
+    "category": "Math",
+    "keywords": ["palindrome", "number"],
+    "examples": [
+      {
+        "input": "x = 121",
+        "output": "true"
+      },
+      {
+        "input": "x = -121",
+        "output": "false"
+      }
+    ],
+    "starterCode": "function isPalindrome(x) {\n    // Your code here\n    \n}"
+  }
+]
