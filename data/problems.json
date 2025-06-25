@@ -6,6 +6,16 @@
     "difficulty": "Easy",
     "category": "Array",
     "keywords": ["array", "hash", "map"],
+    "testCases": [
+      {
+        "input": "[2,7,11,15]\n9",
+        "expectedOutput": "[0,1]"
+      },
+      {
+        "input": "[3,2,4]\n6", 
+        "expectedOutput": "[1,2]"
+      }
+    ],
     "examples": [
       {
         "input": "nums = [2,7,11,15], target = 9",
@@ -25,10 +35,24 @@
     "difficulty": "Easy",
     "category": "String",
     "keywords": ["string", "reverse"],
+    "testCases": [
+      {
+        "input": "['h','e','l','l','o']",
+        "expectedOutput": "['o','l','l','e','h']"
+      },
+      {
+        "input": "['H','a','n','n','a','h']",
+        "expectedOutput": "['h','a','n','n','a','H']"
+      }
+    ],
     "examples": [
       {
         "input": "s = ['h','e','l','l','o']",
         "output": "['o','l','l','e','h']"
+      },
+      {
+        "input": "s = ['H','a','n','n','a','h']",
+        "output": "['h','a','n','n','a','H']"
       }
     ],
     "starterCode": "function reverseString(s) {\n    // Your code here\n    \n}"
@@ -40,6 +64,20 @@
     "difficulty": "Easy",
     "category": "Math",
     "keywords": ["palindrome", "number"],
+    "testCases": [
+      {
+        "input": "121",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "-121",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "10",
+        "expectedOutput": "false"
+      }
+    ],
     "examples": [
       {
         "input": "x = 121",
@@ -48,8 +86,239 @@
       {
         "input": "x = -121",
         "output": "false"
+      },
+      {
+        "input": "x = 10",
+        "output": "false"
       }
     ],
     "starterCode": "function isPalindrome(x) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "valid-parentheses",
+    "title": "Valid Parentheses",
+    "description": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.",
+    "difficulty": "Easy",
+    "category": "Stack",
+    "keywords": ["stack", "parentheses", "string"],
+    "testCases": [
+      {
+        "input": "()",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "()[]{}",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "(]",
+        "expectedOutput": "false"
+      }
+    ],
+    "examples": [
+      {
+        "input": "s = \"()\"",
+        "output": "true"
+      },
+      {
+        "input": "s = \"()[]{}\"",
+        "output": "true"
+      },
+      {
+        "input": "s = \"(]\"",
+        "output": "false"
+      }
+    ],
+    "starterCode": "function isValid(s) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "merge-sorted-arrays",
+    "title": "Merge Two Sorted Lists",
+    "description": "You are given the heads of two sorted linked lists list1 and list2. Merge the two lists in a sorted manner.",
+    "difficulty": "Easy",
+    "category": "Linked List",
+    "keywords": ["linked-list", "merge", "sort"],
+    "testCases": [
+      {
+        "input": "[1,2,4]\n[1,3,4]",
+        "expectedOutput": "[1,1,2,3,4,4]"
+      },
+      {
+        "input": "[]\n[]",
+        "expectedOutput": "[]"
+      },
+      {
+        "input": "[]\n[0]",
+        "expectedOutput": "[0]"
+      }
+    ],
+    "examples": [
+      {
+        "input": "list1 = [1,2,4], list2 = [1,3,4]",
+        "output": "[1,1,2,3,4,4]"
+      },
+      {
+        "input": "list1 = [], list2 = []",
+        "output": "[]"
+      }
+    ],
+    "starterCode": "function mergeTwoLists(list1, list2) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "maximum-subarray",
+    "title": "Maximum Subarray",
+    "description": "Given an integer array nums, find the contiguous subarray which has the largest sum and return its sum.",
+    "difficulty": "Medium",
+    "category": "Dynamic Programming",
+    "keywords": ["array", "dynamic-programming", "kadane"],
+    "testCases": [
+      {
+        "input": "[-2,1,-3,4,-1,2,1,-5,4]",
+        "expectedOutput": "6"
+      },
+      {
+        "input": "[1]",
+        "expectedOutput": "1"
+      },
+      {
+        "input": "[5,4,-1,7,8]",
+        "expectedOutput": "23"
+      }
+    ],
+    "examples": [
+      {
+        "input": "nums = [-2,1,-3,4,-1,2,1,-5,4]",
+        "output": "6"
+      },
+      {
+        "input": "nums = [1]",
+        "output": "1"
+      }
+    ],
+    "starterCode": "function maxSubArray(nums) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "climbing-stairs",
+    "title": "Climbing Stairs",
+    "description": "You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
+    "difficulty": "Easy",
+    "category": "Dynamic Programming",
+    "keywords": ["dynamic-programming", "fibonacci"],
+    "testCases": [
+      {
+        "input": "2",
+        "expectedOutput": "2"
+      },
+      {
+        "input": "3",
+        "expectedOutput": "3"
+      },
+      {
+        "input": "4",
+        "expectedOutput": "5"
+      }
+    ],
+    "examples": [
+      {
+        "input": "n = 2",
+        "output": "2"
+      },
+      {
+        "input": "n = 3",
+        "output": "3"
+      }
+    ],
+    "starterCode": "function climbStairs(n) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "binary-search",
+    "title": "Binary Search",
+    "description": "Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums.",
+    "difficulty": "Easy",
+    "category": "Binary Search",
+    "keywords": ["binary-search", "array"],
+    "testCases": [
+      {
+        "input": "[-1,0,3,5,9,12]\n9",
+        "expectedOutput": "4"
+      },
+      {
+        "input": "[-1,0,3,5,9,12]\n2",
+        "expectedOutput": "-1"
+      }
+    ],
+    "examples": [
+      {
+        "input": "nums = [-1,0,3,5,9,12], target = 9",
+        "output": "4"
+      },
+      {
+        "input": "nums = [-1,0,3,5,9,12], target = 2",
+        "output": "-1"
+      }
+    ],
+    "starterCode": "function search(nums, target) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "fizz-buzz",
+    "title": "Fizz Buzz",
+    "description": "Given an integer n, return a string array answer where answer[i] == \"FizzBuzz\" if i is divisible by 3 and 5, \"Fizz\" if i is divisible by 3, \"Buzz\" if i is divisible by 5, or i as a string if none of the above conditions are true.",
+    "difficulty": "Easy",
+    "category": "Math",
+    "keywords": ["math", "string"],
+    "testCases": [
+      {
+        "input": "3",
+        "expectedOutput": "[\"1\",\"2\",\"Fizz\"]"
+      },
+      {
+        "input": "5",
+        "expectedOutput": "[\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\"]"
+      },
+      {
+        "input": "15",
+        "expectedOutput": "[\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]"
+      }
+    ],
+    "examples": [
+      {
+        "input": "n = 3",
+        "output": "[\"1\",\"2\",\"Fizz\"]"
+      },
+      {
+        "input": "n = 5",
+        "output": "[\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\"]"
+      }
+    ],
+    "starterCode": "function fizzBuzz(n) {\n    // Your code here\n    \n}"
+  },
+  {
+    "id": "best-time-to-buy-sell-stock",
+    "title": "Best Time to Buy and Sell Stock",
+    "description": "You are given an array prices where prices[i] is the price of a given stock on the ith day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.",
+    "difficulty": "Easy",
+    "category": "Array",
+    "keywords": ["array", "dynamic-programming"],
+    "testCases": [
+      {
+        "input": "[7,1,5,3,6,4]",
+        "expectedOutput": "5"
+      },
+      {
+        "input": "[7,6,4,3,1]",
+        "expectedOutput": "0"
+      }
+    ],
+    "examples": [
+      {
+        "input": "prices = [7,1,5,3,6,4]",
+        "output": "5"
+      },
+      {
+        "input": "prices = [7,6,4,3,1]",
+        "output": "0"
+      }
+    ],
+    "starterCode": "function maxProfit(prices) {\n    // Your code here\n    \n}"
   }
 ]

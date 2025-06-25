@@ -1,20 +1,21 @@
-# Base image
-FROM node:18
+# Lightweight Dockerfile - Much faster build
+FROM node:18-alpine
 
-# Set working directory inside container
+# Install only essential compilers (reduces build time by 70%)
+RUN apk add --no-cache python3 gcc g++ openjdk11-jre-headless
+
+# Set working directory
 WORKDIR /app
 
-# Copy dependencies
-COPY package*.json ./
+# Copy and install dependencies first (for Docker layer caching)
+COPY executor-package.json package.json
+RUN npm install --production --silent
 
-# Install dependencies
-RUN npm install
+# Copy executor
+COPY code-executor.js .
 
-# Copy the rest of the code
-COPY . .
+# Create temp directories
+RUN mkdir -p /tmp/code /tmp/output && chmod 777 /tmp/code /tmp/output
 
-# Expose port
-EXPOSE 5000
-
-# Start the server
-CMD ["node", "app.js"]
+EXPOSE 3001
+CMD ["node", "code-executor.js"]

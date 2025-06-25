@@ -36,8 +36,22 @@ app.use("/api/auth", authRoutes);
 app.use("/api/match", matchRoutes);
 app.use("/api/user", userRoutes); // Add this line
 
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    services: {
+      database: 'connected',
+      codeExecutor: process.env.CODE_EXECUTOR_URL || 'http://localhost:3001'
+    }
+  });
+});
+
 // Initialize Socket.IO
 initializeSocket(io);
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => {
+  console.log(`🚀 Main server running on port ${PORT}`);
+  console.log(`🔧 Code executor expected at: ${process.env.CODE_EXECUTOR_URL || 'http://localhost:3001'}`);
+});

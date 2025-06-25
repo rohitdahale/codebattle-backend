@@ -1,0 +1,17 @@
+{
+    "name": "code-executor",
+    "version": "1.0.0",
+    "description": "Secure code execution service",
+    "main": "code-executor.js",
+    "scripts": {
+      "start": "node code-executor.js",
+      "dev": "nodemon code-executor.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "axios": "^1.4.0"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.22"
+    }
+  }

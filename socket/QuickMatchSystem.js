@@ -238,22 +238,22 @@ class QuickMatchSystem {
       // Determine winner (consider both score and submission time)
       if (player1Score > player2Score) {
         match.winner = match.player1.id;
-      } else if (player2Score > player1Score) {
+    } else if (player2Score > player1Score) {
         match.winner = match.player2.id;
-      } else {
-        // If scores are equal, check submission time
+    } else {
+        // If scores are equal, check submission time (earlier submission wins)
         if (match.player1.submissionTime && match.player2.submissionTime) {
-          match.winner = match.player1.submissionTime < match.player2.submissionTime 
-            ? match.player1.id 
-            : match.player2.id;
-        } else if (match.player1.submissionTime) {
-          match.winner = match.player1.id;
-        } else if (match.player2.submissionTime) {
-          match.winner = match.player2.id;
+            match.winner = match.player1.submissionTime < match.player2.submissionTime 
+                ? match.player1.id 
+                : match.player2.id;
+        } else if (match.player1.submissionTime && !match.player2.submissionTime) {
+            match.winner = match.player1.id; // Player 1 submitted, player 2 didn't
+        } else if (match.player2.submissionTime && !match.player1.submissionTime) {
+            match.winner = match.player2.id; // Player 2 submitted, player 1 didn't
         } else {
-          match.winner = null; // Draw
+            match.winner = null; // Both didn't submit - draw
         }
-      }
+    }    
 
       // Save match to database
       await this.saveMatchToDatabase(match);
