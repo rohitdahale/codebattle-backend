@@ -381,7 +381,9 @@ app.get('/health', (req, res) => res.json({
     message: 'Universal Code Executor - Handles ALL problems automatically!' 
 }));
 
-app.listen(3001, () => {
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
     console.log('🚀 Universal Code Executor ready on :3001');
     console.log('✨ No need to write separate code for each problem!');
     console.log('🎯 Automatically handles: Arrays, LinkedLists, Trees, Strings, Numbers');

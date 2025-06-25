@@ -17,5 +17,5 @@ COPY code-executor.js .
 # Create temp directories
 RUN mkdir -p /tmp/code /tmp/output && chmod 777 /tmp/code /tmp/output
 
-EXPOSE 3001
+EXPOSE 5000
 CMD ["node", "code-executor.js"]
