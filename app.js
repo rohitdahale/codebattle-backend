@@ -6,44 +6,36 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
 const matchRoutes = require("./routes/match");
-const userRoutes = require("./routes/user");
+const userRoutes = require("./routes/user"); // Add this line
 const { initializeSocket } = require("./socket/socketHandler");
 
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "https://codebattlelive.netlify.app",
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
 
-// ✅ CORS Setup
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://codebattlelive.netlify.app'
-];
-
+// Middleware
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: ["http://localhost:5173", "https://codebattlelive.netlify.app"],
   credentials: true
 }));
-
-app.options('*', cors()); // ✅ Handle preflight requests
-
 app.use(express.json());
 
-// ✅ Connect to MongoDB
+// Database connection
 connectDB();
 
-// ✅ Routes
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/match", matchRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/user", userRoutes); // Add this line
 
-// ✅ Health Check Route
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'ok', 
@@ -55,19 +47,10 @@ app.get('/health', (req, res) => {
   });
 });
 
-// ✅ Socket.IO Setup
-const io = socketIo(server, {
-  cors: {
-    origin: allowedOrigins,
-    methods: ["GET", "POST"],
-    credentials: true
-  }
-});
-
+// Initialize Socket.IO
 initializeSocket(io);
 
-// ✅ Start Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 server.listen(PORT, () => {
   console.log(`🚀 Main server running on port ${PORT}`);
   console.log(`🔧 Code executor expected at: ${process.env.CODE_EXECUTOR_URL || 'http://localhost:3001'}`);
