@@ -15,7 +15,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "https://codebattlelive.netlify.app",
+    origin: ["https://codebattlelive.netlify.app","http://localhost:5173"],
     methods: ["GET", "POST"],
     credentials: true
   }

@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const QuickMatchSystem = require('./QuickMatchSystem');
 
+const onlineUsers = new Set();
+
 // Socket.IO Authentication Middleware
 const socketAuth = async (socket, next) => {
   try {
@@ -9,27 +11,19 @@ const socketAuth = async (socket, next) => {
     if (!token) {
       return next(new Error('Authentication error'));
     }
-    
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select('-password');
-    
     if (!user) {
       return next(new Error('Authentication error'));
     }
-    
     socket.userId = user._id.toString();
     socket.username = user.username;
-
-    // ADD THIS DEBUG LOG:
-    console.log('Socket authenticated:', { 
-      userId: socket.userId, 
-      username: socket.username 
-    });
     
+    // ADD THIS: Track online user
+    onlineUsers.add(socket.userId);
+    
+    console.log('Socket authenticated:', { userId: socket.userId, username: socket.username });
     next();
-
-    
-
   } catch (error) {
     next(new Error('Authentication error'));
   }
@@ -46,6 +40,8 @@ const initializeSocket = (io) => {
   // Socket.IO event handling
   io.on('connection', (socket) => {
     console.log(`User ${socket.username} connected with socket ${socket.id}`);
+
+    io.emit('online_users_count', onlineUsers.size);
 
     // Join quick match queue
     socket.on('join_queue', () => {
@@ -94,9 +90,29 @@ const initializeSocket = (io) => {
     // Handle disconnect
     socket.on('disconnect', () => {
       console.log(`User ${socket.username} disconnected`);
+
+      onlineUsers.delete(socket.userId);
+    io.emit('online_users_count', onlineUsers.size);
+
       quickMatchSystem.handleDisconnect(socket.userId);
     });
   });
+
+  setInterval(() => {
+    const connectedSockets = Array.from(io.sockets.sockets.values());
+    const activeUserIds = new Set(connectedSockets.map(s => s.userId).filter(Boolean));
+    
+    // Remove users who are no longer connected
+    for (const userId of onlineUsers) {
+      if (!activeUserIds.has(userId)) {
+        onlineUsers.delete(userId);
+      }
+    }
+    
+    // Broadcast updated count
+    io.emit('online_users_count', onlineUsers.size);
+  }, 30000); // Every 30 seconds
+  
 };
 
 module.exports = { initializeSocket };
