@@ -110,7 +110,7 @@ const MatchSchema = new mongoose.Schema({
   // Match type
   matchType: {
     type: String,
-    enum: ['quick', 'ranked', 'tournament', 'practice'],
+    enum: ['quick', 'room', 'tournament', 'practice'],
     default: 'quick'
   },
   

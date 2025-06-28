@@ -9,7 +9,6 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
 const matchRoutes = require("./routes/match");
 const userRoutes = require("./routes/user");
-const roomRoutes = require("./routes/room"); // Add room routes
 
 // Import socket handler
 const { initializeSocket } = require("./socket/socketHandler");
@@ -66,7 +65,6 @@ app.get('/health', (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/match", matchRoutes);
 app.use("/api/user", userRoutes);
-app.use("/api/room", roomRoutes); // Add room routes
 
 // Root endpoint
 app.get('/', (req, res) => {
